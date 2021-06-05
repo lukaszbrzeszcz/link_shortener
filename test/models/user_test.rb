@@ -23,4 +23,15 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid_password?('qwe123')
     assert user.authentication_token.present?
   end
+
+  test "can be admin" do
+    user = User.new(
+      email: 'test2@example.com',
+      password: 'qwe123',
+      password_confirmation: 'qwe123',
+      admin: true
+    )
+
+    assert user.admin?
+  end
 end
