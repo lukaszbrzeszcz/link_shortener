@@ -14,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
 
   test "is database authenticable" do
     user = User.new(
-      email: 'test2@example.com',
+      email: 'xxx@example.com',
       password: 'qwe123',
       password_confirmation: 'qwe123'
     )

@@ -10,4 +10,8 @@ class ApplicationController < ActionController::Base
       render json: resource, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
+
+  def render_json_collection_response(resources, serializer)
+    render json: resources, status: :ok, each_serializer: serializer
+  end
 end

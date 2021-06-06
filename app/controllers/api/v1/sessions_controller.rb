@@ -24,6 +24,6 @@ class Api::V1::SessionsController < Devise::SessionsController
   end
 
   def sign_in_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse!(params)
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:email, :password])
   end
 end

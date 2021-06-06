@@ -12,6 +12,6 @@ class Api::V1::RegistrationsController < Devise::RegistrationsController
   private
 
   def sign_up_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse!(params)
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:email, :password, :password_confirmation])
   end
 end

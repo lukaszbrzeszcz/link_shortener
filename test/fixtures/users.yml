@@ -8,3 +8,9 @@ user_1:
   id: 1
   email: 'test@example.com'
   encrypted_password: <%= User.new.send(:password_digest, 'qwe123')%>
+
+user_2:
+  id: 2
+  email: 'test2@example.com'
+  encrypted_password: <%= User.new.send(:password_digest, 'qwe123')%>
+  authentication_token: 'aaa123'

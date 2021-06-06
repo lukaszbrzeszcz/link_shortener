@@ -1,6 +1,8 @@
 require 'test_helper'
+require 'integration_test_helper'
 
 class UserFlowTest < ActionDispatch::IntegrationTest
+  include IntegrationTestHelper
 
   #
   ### successfully create
@@ -17,7 +19,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
         'id' => Any,
         'type' => 'users',
         'attributes' => {
-          'email' => 'test_2@example.com',
+          'email' => 'xxx@example.com',
           'authentication-token' => Any
         }
       }
@@ -72,18 +74,16 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   #
   test "returns 200 when successfully signed in" do
     user = users(:user_1)
-    user.password = 'qwe123'
 
-    sign_in(user)
+    sign_in(user, 'qwe123')
 
     assert_response :success
   end
 
   test "returns proper response when successfully signed in" do
     user = users(:user_1)
-    user.password = 'qwe123'
 
-    sign_in(user)
+    sign_in(user, 'qwe123')
     user.reload
 
     assert_equal({
@@ -103,18 +103,16 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   #
   test "return 422 when signed in with wrong password" do
     user = users(:user_1)
-    user.password = 'qwe1234'
 
-    sign_in(user)
+    sign_in(user, 'qwe1234')
 
     assert_response :unprocessable_entity
   end
 
   test "return proper message when signed in with wrong password" do
     user = users(:user_1)
-    user.password = 'qwe1234'
 
-    sign_in(user)
+    sign_in(user, 'qwe1234')
 
     assert_equal({
 			"errors" => [
@@ -132,7 +130,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
 
   def create_new_user
     user = User.new(
-      email: 'test_2@example.com',
+      email: 'xxx@example.com',
       password: 'qwe123',
       password_confirmation: 'qwe123'
     )
@@ -165,18 +163,6 @@ class UserFlowTest < ActionDispatch::IntegrationTest
           email: user.email,
           password: user.password,
           password_confirmation: user.password_confirmation
-        }
-      }
-    }
-  end
-
-  def sign_in(user)
-    post api_v1_sign_in_path, params: {
-      data: {
-        type: :users,
-        attributes: {
-          email: user.email,
-          password: user.password,
         }
       }
     }
