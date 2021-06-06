@@ -4,7 +4,6 @@ class CreateLinks < ActiveRecord::Migration[6.0]
       t.text :uri, null: false
       t.string :slug, null: false
       t.references :user, null: false, foreign_key: true
-      t.integer :user_id, null: false
       t.integer :click_count, null: false, default: 0
 
       t.timestamps
