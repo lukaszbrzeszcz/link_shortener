@@ -1,4 +1,5 @@
 class Api::V1::RegistrationsController < Devise::RegistrationsController
+  include Api::V1::RegistrationsApipieDocs
   skip_before_action :verify_authenticity_token, only: :create
 
   # sign up

@@ -40,7 +40,7 @@ module Api::V1::LinksApipieDocs
   def create
   end
 
-  api :DELETE, 'api/v1/links/:id', "Create shortened uri"
+  api :DELETE, 'api/v1/links/:id', "Delete shortened uri"
   param :id, Integer, 'The ID of the resource to be deleted'
   header 'X-User-Email', 'Email of user', required: true
   header 'X-User-Token', 'Authentication token of user', required: true
