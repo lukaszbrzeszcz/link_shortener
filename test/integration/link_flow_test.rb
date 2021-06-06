@@ -6,8 +6,8 @@ class LinkFlowTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
   setup do
-    user = users(:user_2)
-    sign_in(user, 'qwe123')
+    @user = users(:user_2)
+    sign_in(@user, 'qwe123')
     set_authentication_headers
   end
 
@@ -96,6 +96,21 @@ class LinkFlowTest < ActionDispatch::IntegrationTest
       ]
     }, response.parsed_body)
   end
+
+  test "returns 204 when delete existing link" do
+    link = @user.links.create(uri: 'https://google.com')
+
+    delete_link(link)
+
+    assert_response :no_content
+  end
+
+  test "returns 404 when delete non existing link" do
+    another_user = users(:user_1)
+    link = another_user.links.create(uri: 'https://google.com')
+    delete_link(link)
+    assert_response :not_found
+  end
   
   private
 
@@ -108,6 +123,11 @@ class LinkFlowTest < ActionDispatch::IntegrationTest
         }
       }
     }, headers: @headers
+  end
+
+  def delete_link(link)
+    delete api_v1_link_path(link),
+      headers: @headers
   end
 
   def request_shortened_link(uri) 
