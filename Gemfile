@@ -52,3 +52,7 @@ gem 'simple_token_authentication', '~> 1.17'
 
 # Rails REST API documentation tool
 gem 'apipie-rails', '~> 0.5.18'
+
+gem 'haml-rails', '~> 2.0', '>= 2.0.1'
+
+gem 'nokogiri', require: false

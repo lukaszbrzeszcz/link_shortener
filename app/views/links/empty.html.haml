@@ -1,0 +1,11 @@
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %title
+      = @link.og_tags['og:title'] || 'Link Shortener'
+    %meta{content: @link.og_tags['og:description'] || "Application for shortening links", :name => "description"}/
+    %meta{:content => "Łukasz Brzeszcz", :name => "author"}/
+    - @link.og_tags.each do |tag_name, tag_value|
+      %meta{property: tag_name, content: tag_value}
+  %body

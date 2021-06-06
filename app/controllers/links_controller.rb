@@ -6,7 +6,12 @@ class LinksController < ApplicationController
     head 404  unless @link.present?
 
     @link.click!
-    redirect_to @link.uri
+
+    response.set_header('Location', @link.uri)
+    respond_to do |format|
+      format.html { render 'links/empty', status: 302}
+    end
+    #redirect_to @link.uri
   end
 
   private
