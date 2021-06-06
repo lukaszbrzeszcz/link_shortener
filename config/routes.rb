@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
+  apipie
   devise_for :users, skip: [:registrations, :sessions, :passwords]
+
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get "check", to: "tests#check"

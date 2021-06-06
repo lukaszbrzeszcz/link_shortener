@@ -1,4 +1,5 @@
 class Api::V1::LinksController < ApiController
+  include Api::V1::LinksApipieDocs
 
   before_action :set_link, only: [:destroy]
 

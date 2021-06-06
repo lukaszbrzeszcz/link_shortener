@@ -49,3 +49,6 @@ gem 'active_model_serializers', '~> 0.10.12'
 
 # Simple (but safe) token authentication for Rails apps or API with Devise.
 gem 'simple_token_authentication', '~> 1.17'
+
+# Rails REST API documentation tool
+gem 'apipie-rails', '~> 0.5.18'
