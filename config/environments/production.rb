@@ -5,6 +5,7 @@ Rails.application.configure do
   config.cache_classes = true
 
   # Eager load code on boot. This eager loads most of Rails and
+  #
   # your application in memory, allowing both threaded web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
@@ -54,6 +55,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "link_shortener_production"
 
   config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'https://luk-brz-lc.herokuapp.com/' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

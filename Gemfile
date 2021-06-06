@@ -23,7 +23,7 @@ gem 'bcrypt', '~> 3.1.16'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   # use pry for debugging
@@ -32,6 +32,10 @@ end
 
 group :development do
   gem 'listen', '~> 3.2'
+end
+
+group :test do
+  gem 'simplecov'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
