@@ -7,8 +7,12 @@ Rails.application.routes.draw do
         post "sign_up", to: "registrations#create"
         post "sign_in", to: "sessions#create"
       end
+
+      resources :links, only: [:index, :create]
     end
   end
+
+  get "/s/:slug", to: "links#show", as: :shorten
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
