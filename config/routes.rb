@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get "/s/:slug", to: "links#show", as: :shorten
+  get "s/:slug", to: "links#show", as: :shorten
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

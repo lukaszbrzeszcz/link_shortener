@@ -3,7 +3,7 @@ class LinksController < ApplicationController
 
   def show
     @link = Link.where(show_params).first
-    head 404  unless @link.present?
+    head 404 and return unless @link.present?
 
     @link.click!
 

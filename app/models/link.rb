@@ -25,7 +25,11 @@ class Link < ApplicationRecord
   private
 
   def generate_slug
-    self.slug = SecureRandom.uuid[0..6]  unless self.slug.present?
+    return if self.slug.present?
+    loop do
+      self.slug = SecureRandom.uuid[0..6]
+      break if self.class.is_slug_uniq?(self.slug)
+    end
   end
 
   def scrape_og_tags!
@@ -35,5 +39,9 @@ class Link < ApplicationRecord
     require 'og_tags_scraper'
     scraper =  OgTagsScraper.new(self.uri)
     self.og_tags = scraper.scrape 
+  end
+
+  def self.is_slug_uniq?(slug)
+    where(slug: slug).empty?
   end
 end

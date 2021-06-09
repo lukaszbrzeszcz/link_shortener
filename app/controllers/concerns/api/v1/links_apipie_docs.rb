@@ -11,6 +11,13 @@ module Api::V1::LinksApipieDocs
     end
   end
 
+  def_param_group :link_create do
+    param :type, ['links'], desc: 'Type of resource', required: true
+    param :attributes, Hash, desc: 'Hash of attributes', required: true do
+      param :uri, String, desc: 'Original uri', required: true
+    end
+  end
+
   def_param_group :data_links do
     param :data, Array, desc: 'List of links', required: true do
       param_group :link
@@ -20,6 +27,12 @@ module Api::V1::LinksApipieDocs
   def_param_group :data_link do
     param :data, Hash, desc: 'Hash of link', required: true do
       param_group :link
+    end
+  end
+
+  def_param_group :data_link_create do
+    param :data, Hash, desc: 'Hash of link', required: true do
+      param_group :link_create
     end
   end
 
@@ -33,6 +46,7 @@ module Api::V1::LinksApipieDocs
 
   api :POST, 'api/v1/links', "Create shortened uri"
   formats ['json']
+  param_group :data_link_create
   header 'X-User-Email', 'Email of user', required: true
   header 'X-User-Token', 'Authentication token of user', required: true
   returns :data_link, code: :ok, desc: 'Created link info'

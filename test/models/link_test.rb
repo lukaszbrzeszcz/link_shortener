@@ -14,6 +14,11 @@ class LinkTest < ActiveSupport::TestCase
     assert @link.errors[:slug].present?
   end
 
+  test "is slug uniq?" do
+    create_link
+    assert_not Link.is_slug_uniq?(@link.slug)
+  end
+
   test "must have uri" do
     create_link_missing_uri
 

@@ -52,6 +52,14 @@ class LinkFlowTest < ActionDispatch::IntegrationTest
     assert_equal uri, response.location
   end
 
+  test "returns 404 when requesting non existing shortened link" do
+    uri = Rails.application.routes.url_helpers.shorten_url(slug: 'xxx')
+
+    get uri
+
+    assert_response :not_found
+  end
+
   test "returns 200 when requesting user links" do
     uri = "https://google.com"
     create_link(uri)
