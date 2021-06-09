@@ -1,5 +1,5 @@
 # Link Shortener
-An application for shortening links made as a recruitment task by Łukasz Brzeszcz
+An application for shortening links
 
 To see documentation visit https://luk-brz-lc.herokuapp.com/apipie.html
 or https://luk-brz-lc.herokuapp.com/apipie.json
