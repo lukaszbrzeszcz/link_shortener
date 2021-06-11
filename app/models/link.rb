@@ -44,7 +44,9 @@ class Link < ApplicationRecord
     self.og_tags = scraper.scrape
   end
 
-  def self.is_slug_uniq?(slug)
+  def self.slug_uniq?(slug)
     where(slug: slug).empty?
   end
+
+  private_class_method :slug_uniq?
 end

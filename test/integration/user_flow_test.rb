@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 require 'integration_test_helper'
 
@@ -15,17 +17,16 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   test 'returns proper response when creating new user' do
     create_new_user
     assert_equal({
-      'data' => {
-        'id' => Any,
-        'type' => 'users',
-        'attributes' => {
-          'email' => 'xxx@example.com',
-          'authentication-token' => Any
-        }
-      }
-    }, response.parsed_body)
+                   'data' => {
+                     'id' => Any,
+                     'type' => 'users',
+                     'attributes' => {
+                       'email' => 'xxx@example.com',
+                       'authentication-token' => Any
+                     }
+                   }
+                 }, response.parsed_body)
   end
-
 
   #
   ### user already exists
@@ -33,20 +34,19 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   test 'returns proper response when user already exists' do
     create_existing_user
     assert_equal({
-      'errors' => [
-        {
-          'source' => { 'pointer' => '/data/attributes/email' },
-          'detail' => 'has already been taken'
-        }
-      ]
-    }, response.parsed_body)
+                   'errors' => [
+                     {
+                       'source' => { 'pointer' => '/data/attributes/email' },
+                       'detail' => 'has already been taken'
+                     }
+                   ]
+                 }, response.parsed_body)
   end
 
   test 'returns 422 when user already exists' do
     create_existing_user
     assert_response :unprocessable_entity
   end
-
 
   #
   ### mismatched passwords
@@ -59,21 +59,20 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   test 'returns proper response when mismatched passwords' do
     create_user_with_mismatched_passwords
     assert_equal({
-      'errors' => [
-        {
-          'source' => { 'pointer' => '/data/attributes/password-confirmation' },
-          'detail' => 'doesn't match Password'
-        }
-      ]
-    }, response.parsed_body)
+                   'errors' => [
+                     {
+                       'source' => { 'pointer' => '/data/attributes/password-confirmation' },
+                       'detail' => 'doesn\'t match Password'
+                     }
+                   ]
+                 }, response.parsed_body)
   end
-
 
   #
   ### successfully signed in
   #
   test 'returns 200 when successfully signed in' do
-    user = users(:user_1)
+    user = users(:jim)
 
     sign_in(user, 'qwe123')
 
@@ -81,28 +80,28 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'returns proper response when successfully signed in' do
-    user = users(:user_1)
+    user = users(:jim)
 
     sign_in(user, 'qwe123')
     user.reload
 
     assert_equal({
-      'data' => {
-        'id' => Any,
-        'type' => 'users',
-        'attributes' => {
-          'email' => user.email,
-          'authentication-token' => user.authentication_token
-        }
-      }
-    }, response.parsed_body)
+                   'data' => {
+                     'id' => Any,
+                     'type' => 'users',
+                     'attributes' => {
+                       'email' => user.email,
+                       'authentication-token' => user.authentication_token
+                     }
+                   }
+                 }, response.parsed_body)
   end
 
   #
   ### signed in with wrong password
   #
   test 'return 422 when signed in with wrong password' do
-    user = users(:user_1)
+    user = users(:jim)
 
     sign_in(user, 'qwe1234')
 
@@ -110,20 +109,20 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'return proper message when signed in with wrong password' do
-    user = users(:user_1)
+    user = users(:jim)
 
     sign_in(user, 'qwe1234')
 
     assert_equal({
-			'errors' => [
-					{
-							'source' => {
-									'pointer' => '/data/attributes/password'
-							},
-							'detail' => 'is invalid'
-					}
-			]
-    }, response.parsed_body)
+                   'errors' => [
+                     {
+                       'source' => {
+                         'pointer' => '/data/attributes/password'
+                       },
+                       'detail' => 'is invalid'
+                     }
+                   ]
+                 }, response.parsed_body)
   end
 
   private

@@ -28,7 +28,8 @@ module Api
       private
 
       def create_link_params
-        ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:uri])
+        ActiveModelSerializers::Deserialization.jsonapi_parse!(params,
+                                                               only: [:uri])
       end
 
       def set_link

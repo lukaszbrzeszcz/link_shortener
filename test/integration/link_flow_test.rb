@@ -8,7 +8,7 @@ class LinkFlowTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
   setup do
-    @user = users(:user_2)
+    @user = users(:joe)
     sign_in(@user, 'qwe123')
     set_authentication_headers
   end
@@ -116,7 +116,7 @@ class LinkFlowTest < ActionDispatch::IntegrationTest
   end
 
   test 'returns 404 when delete non existing link' do
-    another_user = users(:user_1)
+    another_user = users(:jim)
     link = another_user.links.create(uri: 'https://google.com')
     delete_link(link)
     assert_response :not_found

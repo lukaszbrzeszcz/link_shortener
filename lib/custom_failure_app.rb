@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# thanks to that class devise returns errors
+# in JSON:API standard
 class CustomFailureApp < Devise::FailureApp
   def respond
     if request.controller_class.to_s.start_with?('Api::')
@@ -16,7 +18,8 @@ class CustomFailureApp < Devise::FailureApp
     self.content_type = 'application/vnd.api+json'
     self.response_body = {
       'errors' => [
-        { status: '401', title: 'You need to sign in or sign up before continuing.' }
+        { status: '401',
+          title: 'You need to sign in or sign up before continuing.' }
       ]
     }.to_json
   end

@@ -9,7 +9,8 @@ class ApplicationController < ActionController::Base
     if resource.errors.empty?
       render json: resource, status: :ok
     else
-      render json: resource, status: :unprocessable_entity, serializer: ActiveModel::Serializer::ErrorSerializer
+      render json: resource, status: :unprocessable_entity,
+             serializer: ActiveModel::Serializer::ErrorSerializer
     end
   end
 

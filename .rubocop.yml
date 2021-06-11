@@ -1,0 +1,27 @@
+AllCops:
+  DisplayCopNames: true
+
+  Exclude:
+    - bin/**/*
+    - db/schema.rb
+    - node_modules/**/*
+
+  TargetRubyVersion: 2.7
+
+Metrics/LineLength:
+  Max: 120
+  Exclude:
+    - config/initializers/devise.rb
+
+Metrics/MethodLength:
+  Exclude:
+    - test/**/*
+
+Rails:
+  Enabled: true
+
+Rails/FilePath:
+  Enabled: false
+
+Style/SymbolArray:
+  EnforcedStyle: brackets

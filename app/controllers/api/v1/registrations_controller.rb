@@ -18,7 +18,8 @@ module Api
 
       def sign_up_params
         ActiveModelSerializers::Deserialization.jsonapi_parse!(params,
-                                                               only: [:email, :password, :password_confirmation])
+                                                               only: [:email,
+                                                                      :password, :password_confirmation])
       end
     end
   end

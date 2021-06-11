@@ -11,7 +11,8 @@ module Api
         param :attributes, Hash, desc: 'Hash of attributes', required: true do
           param :uri, String, desc: 'Original uri', required: true
           param :short, String, desc: 'Shortened uri', required: true
-          param :'click-count', Integer, desc: 'Number of clicks', required: true
+          param :'click-count', Integer, desc: 'Number of clicks',
+                                         required: true
         end
       end
 
@@ -44,7 +45,8 @@ module Api
       header 'X-User-Email', 'Email of user', required: true
       header 'X-User-Token', 'Authentication token of user', required: true
       returns :data_links, code: :ok, desc: 'All links'
-      error :unauthorized, 'Unauthorized - you are not allowed to access this resource'
+      error :unauthorized,
+            'Unauthorized - you are not allowed to access this resource'
       def index; end
 
       api :POST, 'api/v1/links', 'Create shortened uri'
@@ -53,7 +55,8 @@ module Api
       header 'X-User-Email', 'Email of user', required: true
       header 'X-User-Token', 'Authentication token of user', required: true
       returns :data_link, code: :ok, desc: 'Created link info'
-      error :unauthorized, 'Unauthorized - you are not allowed to access this resource'
+      error :unauthorized,
+            'Unauthorized - you are not allowed to access this resource'
       def create; end
 
       api :DELETE, 'api/v1/links/:id', 'Delete shortened uri'
@@ -61,7 +64,8 @@ module Api
       header 'X-User-Email', 'Email of user', required: true
       header 'X-User-Token', 'Authentication token of user', required: true
       returns code: :no_content, desc: 'Created link info'
-      error :unauthorized, 'Unauthorized - you are not allowed to access this resource'
+      error :unauthorized,
+            'Unauthorized - you are not allowed to access this resource'
       error :not_found, 'Resource not existing'
       def destroy; end
     end

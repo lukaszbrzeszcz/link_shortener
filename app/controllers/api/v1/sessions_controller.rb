@@ -29,7 +29,9 @@ module Api
       end
 
       def sign_in_params
-        ActiveModelSerializers::Deserialization.jsonapi_parse!(params, only: [:email, :password])
+        ActiveModelSerializers::Deserialization.jsonapi_parse!(params,
+                                                               only: [:email,
+                                                                      :password])
       end
     end
   end

@@ -48,14 +48,14 @@ class LinkTest < ActiveSupport::TestCase
   def create_link
     @link = Link.new(
       uri: 'https://google.com',
-      user: users(:user_1)
+      user: users(:jim)
     )
     @link.save
   end
 
   def create_link_missing_uri
     @link = Link.new(
-      user: users(:user_1)
+      user: users(:jim)
     )
     @link.save
   end
@@ -70,7 +70,7 @@ class LinkTest < ActiveSupport::TestCase
   def create_link_with_slug
     @link = Link.new(
       uri: 'https://google.com',
-      user: users(:user_1),
+      user: users(:jim),
       slug: 'aaabbb'
     )
     @link.save
