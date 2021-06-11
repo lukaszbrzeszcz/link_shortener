@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 module IntegrationTestHelper
-  def sign_in(user, password=nil)
+  def sign_in(user, password = nil)
     post api_v1_sign_in_path, params: {
       data: {
         type: :users,
         attributes: {
           email: user.email,
-          password: password,
+          password: password
         }
       }
     }

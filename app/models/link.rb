@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Link < ApplicationRecord
   # validations
   validates :uri, presence: true
@@ -14,7 +16,7 @@ class Link < ApplicationRecord
   serialize :og_tags, Hash
 
   def short
-    Rails.application.routes.url_helpers.shorten_url(slug: self.slug)
+    Rails.application.routes.url_helpers.shorten_url(slug: slug)
   end
 
   def click!
@@ -25,20 +27,21 @@ class Link < ApplicationRecord
   private
 
   def generate_slug
-    return if self.slug.present?
+    return if slug.present?
+
     loop do
       self.slug = SecureRandom.uuid[0..6]
-      break if self.class.is_slug_uniq?(self.slug)
+      break if self.class.is_slug_uniq?(slug)
     end
   end
 
   def scrape_og_tags!
     return  if Rails.env.test?
-    return  if self.og_tags.present?
+    return  if og_tags.present?
 
     require 'og_tags_scraper'
-    scraper =  OgTagsScraper.new(self.uri)
-    self.og_tags = scraper.scrape 
+    scraper = OgTagsScraper.new(uri)
+    self.og_tags = scraper.scrape
   end
 
   def self.is_slug_uniq?(slug)

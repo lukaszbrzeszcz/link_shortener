@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 class CustomFailureApp < Devise::FailureApp
-  
   def respond
     if request.controller_class.to_s.start_with?('Api::')
       json_api_error_response

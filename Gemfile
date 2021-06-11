@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -56,3 +58,5 @@ gem 'apipie-rails', '~> 0.5.18'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 
 gem 'nokogiri', require: false
+
+gem 'rubocop-rails', '~> 2.10', '>= 2.10.1', require: false

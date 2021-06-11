@@ -1,37 +1,39 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class LinkTest < ActiveSupport::TestCase
-  test "generates slug after create" do
+  test 'generates slug after create' do
     create_link
 
     assert @link.slug.present?
   end
 
-  test "have_unique slug" do
+  test 'have_unique slug' do
     create_link_with_slug
     create_link_with_slug
 
     assert @link.errors[:slug].present?
   end
 
-  test "is slug uniq?" do
+  test 'is slug uniq?' do
     create_link
     assert_not Link.is_slug_uniq?(@link.slug)
   end
 
-  test "must have uri" do
+  test 'must have uri' do
     create_link_missing_uri
 
     assert @link.errors[:uri].present?
   end
 
-  test "must have user" do
+  test 'must have user' do
     create_link_missing_user
 
     assert @link.errors[:user].present?
   end
 
-  test "incremens click_count after click" do
+  test 'incremens click_count after click' do
     create_link
 
     assert_equal 0, @link.click_count

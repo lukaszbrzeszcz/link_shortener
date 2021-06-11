@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-  test "have unique email" do
+  test 'have unique email' do
     user = User.new(
       email: 'test@example.com',
       password: 'qwe123',
@@ -12,7 +14,7 @@ class UserTest < ActiveSupport::TestCase
     assert user.errors[:email].present?
   end
 
-  test "is database authenticable" do
+  test 'is database authenticable' do
     user = User.new(
       email: 'xxx@example.com',
       password: 'qwe123',
@@ -24,7 +26,7 @@ class UserTest < ActiveSupport::TestCase
     assert user.authentication_token.present?
   end
 
-  test "can be admin" do
+  test 'can be admin' do
     user = User.new(
       email: 'test2@example.com',
       password: 'qwe123',

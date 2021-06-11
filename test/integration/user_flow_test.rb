@@ -7,12 +7,12 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   #
   ### successfully create
   #
-  test "returns 200 when creating new user" do
+  test 'returns 200 when creating new user' do
     create_new_user
     assert_response :success
   end
 
-  test "returns proper response when creating new user" do
+  test 'returns proper response when creating new user' do
     create_new_user
     assert_equal({
       'data' => {
@@ -30,7 +30,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   #
   ### user already exists
   #
-  test "returns proper response when user already exists" do
+  test 'returns proper response when user already exists' do
     create_existing_user
     assert_equal({
       'errors' => [
@@ -42,7 +42,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
     }, response.parsed_body)
   end
 
-  test "returns 422 when user already exists" do
+  test 'returns 422 when user already exists' do
     create_existing_user
     assert_response :unprocessable_entity
   end
@@ -51,18 +51,18 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   #
   ### mismatched passwords
   #
-  test "returns 422 when mismatched passwords" do
+  test 'returns 422 when mismatched passwords' do
     create_user_with_mismatched_passwords
     assert_response :unprocessable_entity
   end
 
-  test "returns proper response when mismatched passwords" do
+  test 'returns proper response when mismatched passwords' do
     create_user_with_mismatched_passwords
     assert_equal({
       'errors' => [
         {
           'source' => { 'pointer' => '/data/attributes/password-confirmation' },
-          'detail' => "doesn't match Password"
+          'detail' => 'doesn't match Password'
         }
       ]
     }, response.parsed_body)
@@ -72,7 +72,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   #
   ### successfully signed in
   #
-  test "returns 200 when successfully signed in" do
+  test 'returns 200 when successfully signed in' do
     user = users(:user_1)
 
     sign_in(user, 'qwe123')
@@ -80,7 +80,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "returns proper response when successfully signed in" do
+  test 'returns proper response when successfully signed in' do
     user = users(:user_1)
 
     sign_in(user, 'qwe123')
@@ -101,7 +101,7 @@ class UserFlowTest < ActionDispatch::IntegrationTest
   #
   ### signed in with wrong password
   #
-  test "return 422 when signed in with wrong password" do
+  test 'return 422 when signed in with wrong password' do
     user = users(:user_1)
 
     sign_in(user, 'qwe1234')
@@ -109,18 +109,18 @@ class UserFlowTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
   end
 
-  test "return proper message when signed in with wrong password" do
+  test 'return proper message when signed in with wrong password' do
     user = users(:user_1)
 
     sign_in(user, 'qwe1234')
 
     assert_equal({
-			"errors" => [
+			'errors' => [
 					{
-							"source" => {
-									"pointer" => "/data/attributes/password"
+							'source' => {
+									'pointer' => '/data/attributes/password'
 							},
-							"detail" => "is invalid"
+							'detail' => 'is invalid'
 					}
 			]
     }, response.parsed_body)
