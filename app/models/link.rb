@@ -24,6 +24,14 @@ class Link < ApplicationRecord
     save!
   end
 
+  def self.slug_uniq?(slug)
+    where(slug: slug).empty?
+  end
+
+  def slug_uniq?(slug)
+    self.class.slug_uniq?(slug)
+  end
+
   private
 
   def generate_slug
@@ -31,7 +39,7 @@ class Link < ApplicationRecord
 
     loop do
       self.slug = SecureRandom.uuid[0..6]
-      break if self.class.is_slug_uniq?(slug)
+      break if slug_uniq?(slug)
     end
   end
 
@@ -44,9 +52,4 @@ class Link < ApplicationRecord
     self.og_tags = scraper.scrape
   end
 
-  def self.slug_uniq?(slug)
-    where(slug: slug).empty?
-  end
-
-  private_class_method :slug_uniq?
 end

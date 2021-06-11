@@ -18,7 +18,7 @@ class LinkTest < ActiveSupport::TestCase
 
   test 'is slug uniq?' do
     create_link
-    assert_not Link.is_slug_uniq?(@link.slug)
+    assert_not Link.slug_uniq?(@link.slug)
   end
 
   test 'must have uri' do
